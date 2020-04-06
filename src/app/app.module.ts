@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule} from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
+import { InMemoryWebApiModule} from 'angular-in-memory-web-api';
 
 
 @NgModule({
@@ -20,11 +21,12 @@ import { InMemoryDataService } from './in-memory-data.service';
     MessagesComponent,
     DashboardComponent
   ],
-  imports: [
+  imports: [ //IMPORTANT!!! imports must be in this order!!!
     BrowserModule,
     FormsModule,
-    AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    AppRoutingModule
   ],
   providers: [
     // no need to place any providers due to the `providedIn` flag...

@@ -10,6 +10,9 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class HeroService {
   private heroesUrl = 'api/heroes';  // URL to web api
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
@@ -39,6 +42,30 @@ export class HeroService {
       console.error(error);
       this.log(`${operation} failed: ${error.message}`);
       return of (result as T);
-    }
+    };
+  }
+
+  updateHero(hero: Hero): Observable<any> {
+    return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
+      tap( _ => this.log(`update hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
+
+  addHero (hero: Hero): Observable<Hero>{
+    return this.http.post<Hero>(this.heroesUrl, hero,this.httpOptions)
+      .pipe(
+        tap((newHero: Hero) => this.log(`add hero id=${newHero.id}`)),
+        catchError(this.handleError<Hero>(`addHero`))
+      );
+  }
+
+  deleteHero(hero: Hero | number): Observable<Hero> {
+    const id = typeof hero === 'number' ? hero : hero.id;
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.delete<Hero>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`delete hero id=${id}`)),
+      catchError(this.handleError<Hero>(`delete hero`))
+    );
   }
 }
