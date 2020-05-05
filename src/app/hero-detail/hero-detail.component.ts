@@ -35,4 +35,8 @@ export class HeroDetailComponent implements OnInit {
     this.heroService.updateHero(this.hero)
       .subscribe( () => this.goBack());
   }
+
+  showFriends(): void{
+    console.log("here are the friends");
+  }
 }

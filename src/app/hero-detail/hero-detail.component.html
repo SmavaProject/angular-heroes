@@ -6,6 +6,10 @@
       <input [(ngModel)]="hero.name" placeholder="name" />
     </label>
   </div>
+  <h3>Hero's friends: </h3>
+  <button class="showFriends" routerLink="/detail/{{hero.id}}/friends" (click)="showFriends()">Show friends</button>
 </div>
 <button (click)="goBack()">go back</button>
 <button (click)="save()">save</button>
+
+
