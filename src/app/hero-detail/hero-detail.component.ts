@@ -13,6 +13,8 @@ export class HeroDetailComponent implements OnInit {
 
   @Input() hero: Hero;
 
+  heroesFriends: Hero[];
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -21,6 +23,7 @@ export class HeroDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getHero();
+    this.getHeroesFriends();
   }
 
   getHero(): void{
@@ -28,6 +31,12 @@ export class HeroDetailComponent implements OnInit {
     this.heroService.getHero(id)
       .subscribe(hero => this.hero = hero);
   }
+  getHeroesFriends(): void{
+    //const id = +this.route.snapshot.paramMap.get('id'); // + to convert Srt to Int
+    this.heroService.getHeroes()
+      .subscribe(heroes => this.heroesFriends = heroes);
+  }
+
   goBack(): void{
     this.location.back();
   }
