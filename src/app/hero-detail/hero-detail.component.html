@@ -7,8 +7,8 @@
     </label>
   </div>
   <h3>Hero's friends: </h3>
-  <p class="friends "*ngFor="let h of heroesFriends; let i = index">{{i+1}}. {{h.name}}</p>
-  <button class="showFriends" routerLink="/detail/{{hero.id}}/friends" (click)="showFriends()">Show friends</button>
+  <p *ngFor="let h of heroesFriends; let i = index" class="friends" >{{i+1}}. {{h.name}}</p>
+  <button class="showFriends" routerLink="/detail/{{hero.id}}/friends" appListener (click)="showFriends()">Show friends</button>
 </div>
 <button (click)="goBack()">go back</button>
 <button (click)="save()">save</button>
