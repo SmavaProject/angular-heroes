@@ -8,11 +8,12 @@ export class ListenerDirective {
     //el.nativeElement.style.backgroundColor = 'yellow';
     console.log("directive is running");
   }
-  @HostListener('mouseenter') onMouse() {
+  @HostListener('mouseenter', ['$event']) onMouse(event: any) {
     console.log("directive is running !!!");
   }
 
-  @HostListener('click') onClick() {
+  @HostListener('click', ['$event']) onClick(event: any) {
     console.log("directive is running on click!!!");
+    console.log(event.target);
   }
 }
