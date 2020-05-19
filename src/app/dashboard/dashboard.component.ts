@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HeroService} from '../hero.service';
 import { Hero} from '../hero';
+import {ChangeDetectionService} from '../change-detection.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +11,20 @@ import { Hero} from '../hero';
 export class DashboardComponent implements OnInit {
 
   heroes: Hero[] = [];
-  constructor(private heroService: HeroService) { }
+  start = 1;
+  end;
+  constructor(private heroService: HeroService, private changeDetectionService: ChangeDetectionService) { }
 
   ngOnInit() {
-    this.getHeroes();
+    this.changeDetectionService.getValue().subscribe( val =>{
+      this.end = val;
+    })
+    this.getHeroes(this.start, this.end);
+    console.log(this.end);
   }
 
-  getHeroes(): void{
+  getHeroes(start: number, end: number): void {
     this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes.slice(1, 5));
+      .subscribe(heroes => this.heroes = heroes.slice(start, end));
   }
 }
