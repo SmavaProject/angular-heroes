@@ -12,6 +12,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {ListenerDirective} from './listener.directive';
+import { HeroesDirective } from './heroes/heroes.directive';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {ListenerDirective} from './listener.directive';
     HeroDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    ListenerDirective
+    ListenerDirective,
+    HeroesDirective
   ],
   imports: [ // IMPORTANT!!! imports must be in this order!!!
     BrowserModule,

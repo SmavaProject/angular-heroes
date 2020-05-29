@@ -68,4 +68,8 @@ export class HeroService {
       catchError(this.handleError<Hero>(`delete hero`))
     );
   }
+
+  dummyFuntion(variable: any): void{
+    console.log(variable);
+  }
 }
